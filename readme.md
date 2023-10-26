@@ -8,22 +8,23 @@ Projects:
 
 -------------------------------------------------------------------------------------------------
 
-- czary
-    1. Obrażeni
+- czary - Ihnatsi Byshniou
+    1. Obrażenia
     2. Bufy/debufy
-    3. Mistrzostwo magii
-    4. Czary na pola
+    3. Mistrzostwo magii*
+    4. Czary na pola*
 -------------------------------------------------------------------------------------------------
 
-- zamki/frakcje
+- zamki/frakcje - Nowakowska Natalia
     1. Typ poruszania się,
     2. Dwie dodatkowe frakcje
 -------------------------------------------------------------------------------------------------
 
-- pola specjalne
-    1. Przeszkoda dla jednostek chodzących 2.zadające obrażenia (dla latających albo chodzacych)
-    3. Nakładające buffy/debufy
-    4. Przszkody do zaatakowania
+- pola specjalne - Bartosz Bronikowski
+    1. Przeszkoda dla jednostek chodzących 
+    2. zadające obrażenia (dla latających albo chodzacych)
+    3. Nakładające buffy/debufy*
+    4. Przeszkody do zaatakowania
 -------------------------------------------------------------------------------------------------
 
 - ekonomia
@@ -37,7 +38,7 @@ Projects:
     2. Combat 3 Primary
 -------------------------------------------------------------------------------------------------
 
-- umiejętności
+- umiejętności - Mateusz Konofał
     1. heros
     2. 6 z góry, 4 z góry - wzmocnienie kreatury, 2 kolejne nowe mechaniki
     3. 4 z dołu, magia
