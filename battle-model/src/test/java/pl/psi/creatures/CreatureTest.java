@@ -2,6 +2,8 @@ package pl.psi.creatures;
 
 import com.google.common.collect.Range;
 import org.junit.jupiter.api.Test;
+import pl.psi.Board;
+import pl.psi.Point;
 import pl.psi.TurnQueue;
 
 import java.util.List;
@@ -176,5 +178,23 @@ public class CreatureTest {
         turnQueue.next();
         turnQueue.next();
         assertThat(selfHealAfterEndOfTurnCreature.getCurrentHp()).isEqualTo(100);
+    }
+
+    @Test
+    void creatureShouldIncreaseAttackByTravel() {
+
+        final CastleFactory castleFactory = new CastleFactory();
+
+        final Creature travelCreature = castleFactory.create(false, 6, 1);
+        final Creature aDefender = castleFactory.create(false, 1, 1);
+
+        final List< Creature > c1 = List.of( travelCreature );
+        final List< Creature > c2 = List.of(aDefender);
+        final Board board = new Board( c1, c2 );
+
+        board.move( travelCreature, new Point( 3, 3 ) );
+
+        travelCreature.attack(aDefender);
+        assertThat(aDefender.getCurrentHp()).isEqualTo(100);
     }
 }

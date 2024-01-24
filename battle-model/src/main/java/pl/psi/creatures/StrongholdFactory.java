@@ -12,7 +12,7 @@ public class StrongholdFactory
         {
             switch( aTier )
             {
-                case 1:
+               case 1:
                     return new Creature.Builder().statistic( CreatureStatistic.GOBLIN )
                             .amount( aAmount )
                             .build();

@@ -35,11 +35,12 @@ public class CastleFactory
                             .amount( aAmount )
                             .build();
                 case 6:
-                    return new Creature.Builder().statistic( CreatureStatistic.CAVALIER )
+                    return new TravelBonusCreature(new Creature.Builder().statistic( CreatureStatistic.CAVALIER )
                             .amount( aAmount )
-                            .build();
+                            .build(), 0.05);
                 case 7:
                     return new Creature.Builder().statistic( CreatureStatistic.ANGEL )
+                            .calculator(new DamageIncreaseAgainstDevilCalculator(1.5))
                             .amount( aAmount )
                             .build();
                 default:
@@ -76,6 +77,7 @@ public class CastleFactory
                             .build();
                 case 7:
                     return new Creature.Builder().statistic( CreatureStatistic.ARCHANGEL )
+                            .calculator(new DamageIncreaseAgainstDevilCalculator(1.5))
                             .amount( aAmount )
                             .build();
                 default:

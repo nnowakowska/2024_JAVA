@@ -16,6 +16,7 @@ public class CreatureStats implements CreatureStatisticIf{
     private final int armor;
     private final int maxHp;
     private final int moveRange;
+    private final int shots;
     private final Range< Integer > damage;
     private final int tier;
     private final String description;

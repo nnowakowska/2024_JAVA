@@ -35,7 +35,7 @@ public class Board
         return Optional.ofNullable( map.get( aPoint ) );
     }
 
-    void move( final Creature aCreature, final Point aPoint )
+    public void move(final Creature aCreature, final Point aPoint)
     {
         if( canMove( aCreature, aPoint ) )
         {

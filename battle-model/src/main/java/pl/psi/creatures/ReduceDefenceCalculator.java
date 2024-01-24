@@ -7,7 +7,6 @@ import java.util.Random;
  */
 class ReduceDefenceCalculator extends AbstractCalculateDamageStrategy
 {
-
     private final double factor;
 
     public ReduceDefenceCalculator()

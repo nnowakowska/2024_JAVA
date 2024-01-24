@@ -27,6 +27,8 @@ public class Creature implements PropertyChangeListener {
     private int amount;
     private int currentHp;
     private int counterAttackCounter = 1;
+
+    private int shots;
     private DamageCalculatorIf calculator;
 
     Creature() {
@@ -37,6 +39,7 @@ public class Creature implements PropertyChangeListener {
         stats = aStats;
         amount = aAmount;
         currentHp = stats.getMaxHp();
+        shots = stats.getShots();
         calculator = aCalculator;
     }
 
@@ -106,9 +109,20 @@ public class Creature implements PropertyChangeListener {
             counterAttackCounter = 1;
         }
     }
-
     protected void restoreCurrentHpToMax() {
         currentHp = stats.getMaxHp();
+    }
+
+    int getShots() {return stats.getShots();}
+
+    public int getAttackRange(){
+        if(getShots() == 0){
+            return 2;
+        }
+        else{
+            return Integer.MAX_VALUE;
+        }
+
     }
 
     public String getName() {
