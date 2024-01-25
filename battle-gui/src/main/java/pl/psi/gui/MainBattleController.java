@@ -40,6 +40,10 @@ public class MainBattleController implements PropertyChangeListener {
             for (int y = 0; y < 10; y++) {
                 Point currentPoint = new Point(x, y);
                 Optional<Creature> creature = gameEngine.getCreature(currentPoint);
+
+                Creature c = creature.get();
+
+
                 final MapTile mapTile = new MapTile();
                 creature.ifPresent(mapTile::setCreature);
                 if (gameEngine.isCurrentCreature(currentPoint)) {

@@ -115,12 +115,12 @@ public class Creature implements PropertyChangeListener {
 
     int getShots() {return stats.getShots();}
 
-    public int getAttackRange(){
+    public double getAttackRange(){
         if(getShots() == 0){
             return 2;
         }
         else{
-            return Integer.MAX_VALUE;
+            return 15;
         }
 
     }

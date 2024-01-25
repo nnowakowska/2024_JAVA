@@ -17,8 +17,12 @@ public class GameEngine {
     private final PropertyChangeSupport observerSupport = new PropertyChangeSupport(this);
 
     public  GameEngine(final Hero aHero1, final Hero aHero2) {
+        this(aHero1, aHero2, new Board(aHero1.getCreatures(), aHero2.getCreatures()));
+    }
+
+    GameEngine(Hero aHero1, Hero aHero2, Board aBoard) {
         turnQueue = new TurnQueue(aHero1.getCreatures(), aHero2.getCreatures());
-        board = new Board(aHero1.getCreatures(), aHero2.getCreatures());
+        board = aBoard;
     }
 
     public void attack(final Point point) {
@@ -53,9 +57,11 @@ public class GameEngine {
     public boolean canAttack(final Point point) {
         double distance = board.getPosition(turnQueue.getCurrentCreature())
                 .distance(point);
+        double range = turnQueue.getCurrentCreature().getAttackRange();
+
         return board.getCreature(point)
                 .isPresent()
-                && distance < 2 && distance > 0;
+                &&  distance < range  && distance > 0;
     }
 
     public boolean isCurrentCreature(Point aPoint) {

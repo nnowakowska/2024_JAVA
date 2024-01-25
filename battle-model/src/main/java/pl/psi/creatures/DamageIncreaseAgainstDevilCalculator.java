@@ -13,14 +13,7 @@ class DamageIncreaseAgainstDevilCalculator extends AbstractCalculateDamageStrate
         super( new Random() );
         factor = aFactor;
     }
-//    @Override
-//    public int calculateDamage(Creature aAttacker, Creature aDefender){
-//        int aDamage = calculateDamage(aAttacker, aDefender);
-//        if(aDefender.getName().toLowerCase().contains("behemoth")){
-//            aDamage *= factor;
-//        }
-//        return aDamage;
-//    }
+
 
     @Override
     public int getAttack(Creature aAttacker, Creature aDefender){
