@@ -1,0 +1,10 @@
+1. Dodane dwie nowe frakcje: Castle i Stronghold
+2. Dodane postacie strzelające + Test
+3. Dodany podwojny atak + Test
+4. Dodane zwiększanie ataku dla devils + test
+5. Dodany bonus od przebytych pól
+6. Dodane zwiększenie limitu counterattacku
+
+To Do:
+testy dla travelbonus oraz increasedretaliationcreature
+latanie

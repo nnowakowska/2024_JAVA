@@ -4,11 +4,19 @@ import java.beans.PropertyChangeEvent;
 
 import com.google.common.collect.Range;
 
-class AttackTwiceCreature extends Creature {
+/**
+ * TODO: Describe this class (The first line - until the first dot - will interpret as the brief description).
+ */
+class IncreasedRetaliationCreature extends Creature {
     private final Creature decorated;
+    private final int maxRetaliations;
+    private int retaliationCounter;
+    public IncreasedRetaliationCreature(final Creature aDecorated, int aRetaliationCounter) {
 
-    public AttackTwiceCreature(final Creature aDecorated) {
         decorated = aDecorated;
+        decorated.counterAttackCounter = aRetaliationCounter;
+        maxRetaliations = aRetaliationCounter;
+        stats = decorated.getStats();
     }
 
     @Override
@@ -23,9 +31,13 @@ class AttackTwiceCreature extends Creature {
 
     @Override
     public int getCounterAttackCounter() {
-        return decorated.getCounterAttackCounter();
+        return retaliationCounter;
     }
 
+    @Override
+    boolean counterAttacked(){
+        return decorated.counterAttacked();
+    }
     @Override
     public DamageCalculatorIf getCalculator() {
         return decorated.getCalculator();
@@ -33,15 +45,7 @@ class AttackTwiceCreature extends Creature {
 
     @Override
     public void attack(final Creature aDefender) {
-        if (isAlive()) {
-            int damage = getCalculator().calculateDamage(this, aDefender);
-            decorated.applyDamage(aDefender, damage);
-            if (decorated.canCounterAttack(aDefender)) {
-                decorated.counterAttack(aDefender);
-            }
-            damage = getCalculator().calculateDamage(this, aDefender);
-            applyDamage(aDefender, damage);
-        }
+        decorated.attack(aDefender);
     }
 
     @Override

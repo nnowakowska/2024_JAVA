@@ -2,13 +2,12 @@ package pl.psi.creatures;
 
 import com.google.common.collect.Range;
 import org.junit.jupiter.api.Test;
-import pl.psi.Board;
-import pl.psi.Point;
-import pl.psi.TurnQueue;
+import pl.psi.*;
 
 import java.util.List;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 /**
  * TODO: Describe this class (The first line - until the first dot - will interpret as the brief description).
@@ -181,20 +180,92 @@ public class CreatureTest {
     }
 
     @Test
-    void creatureShouldIncreaseAttackByTravel() {
+    void defenderShouldCounterAttackTwicePerTurn() {
+        final Creature defender = new IncreasedRetaliationCreature(new Creature.Builder()
+                .statistic(CreatureStats.builder()
+                        .maxHp(100)
+                        .damage(Range.closed(10, 10))
+                        .attack(0)
+                        .armor(0)
+                        .build())
+                .build(), 2);
 
-        final CastleFactory castleFactory = new CastleFactory();
+        final Creature aAttacker = new Creature.Builder().statistic(CreatureStats.builder()
+                        .maxHp(100)
+                        .damage(NOT_IMPORTANT_DMG)
+                        .attack(0)
+                        .build())
+                .build();
 
-        final Creature travelCreature = castleFactory.create(false, 6, 1);
-        final Creature aDefender = castleFactory.create(false, 1, 1);
-
-        final List< Creature > c1 = List.of( travelCreature );
-        final List< Creature > c2 = List.of(aDefender);
-        final Board board = new Board( c1, c2 );
-
-        board.move( travelCreature, new Point( 3, 3 ) );
-
-        travelCreature.attack(aDefender);
-        assertThat(aDefender.getCurrentHp()).isEqualTo(100);
+        // when
+        aAttacker.attack(defender);
+        // then
+        assertThat(defender.getCounterAttackCounter() >10);
     }
+
+//    @Test
+//    void creatureShouldIncreaseAttackByTravel() {
+//        final Creature aAttacker = new TravelBonusCreature(new Creature.Builder()
+//                .statistic(CreatureStats.builder()
+//                        .maxHp(100)
+//                        .damage(Range.closed(10, 10))
+//                        .build())
+//                .build(), 0.05);
+//
+//        final Creature aDefender = new Creature.Builder().statistic(CreatureStats.builder()
+//                        .maxHp(100)
+//                        .damage(NOT_IMPORTANT_DMG)
+//                        .build())
+//                .build();
+//        final List<Creature> c1 = List.of(aAttacker);
+//        final List<Creature> c2 = List.of(aDefender);
+//        final Board board = new Board(c1, c2);
+//
+//        board.move(aAttacker, new Point(14, 2));
+//        aAttacker.attack(aDefender);
+//        assertThat(aDefender.getCurrentHp()).isEqualTo(100);
+//    }
+
+    @Test
+    void shouldAttackTwice(){
+        final Creature attackTwiceCreature = new AttackTwiceCreature(new Creature.Builder()
+                .statistic(CreatureStats.builder()
+                        .maxHp(100)
+                        .damage(Range.closed(10, 10))
+                        .build())
+                .build());
+
+        final Creature aDefender = new Creature.Builder().statistic(CreatureStats.builder()
+                        .maxHp(100)
+                        .damage(NOT_IMPORTANT_DMG)
+                        .build())
+                .build();
+        attackTwiceCreature.attack(aDefender);
+        assertThat(aDefender.getCurrentHp()).isEqualTo(80);
+    }
+
+    @Test
+    void shouldBlockCounterAttack(){
+            final Creature attacker = new NoEnemyRetaliationCreature(new Creature.Builder().statistic(CreatureStats.builder()
+                            .maxHp(100)
+                            .damage(NOT_IMPORTANT_DMG)
+                            .attack(0)
+                            .armor(0)
+                            .build())
+                    .build());
+
+            final Creature defender = new Creature.Builder().statistic(CreatureStats.builder()
+                            .maxHp(100)
+                            .damage(Range.closed(10, 10))
+                            .attack(0)
+                            .build())
+                    .build();
+
+            // when
+            attacker.attack(defender);
+            // then
+            assertThat(attacker.getCurrentHp()).isEqualTo(100);
+        }
+
+
 }

@@ -19,13 +19,13 @@ public class CastleFactory
                             .amount( aAmount )
                             .build();
                 case 2:
-                    return new Creature.Builder().statistic( CreatureStatistic.ARCHER )
+                    return new RangedCreature(new Creature.Builder().statistic( CreatureStatistic.ARCHER )
                             .amount( aAmount )
-                            .build();
+                            .build());
                 case 3:
-                    return new Creature.Builder().statistic( CreatureStatistic.GRIFFIN )
+                    return new IncreasedRetaliationCreature(new Creature.Builder().statistic( CreatureStatistic.GRIFFIN )
                             .amount( aAmount )
-                            .build();
+                            .build(), 2);
                 case 4:
                     return new Creature.Builder().statistic( CreatureStatistic.SWORDSMAN )
                             .amount( aAmount )
@@ -56,17 +56,17 @@ public class CastleFactory
                             .amount( aAmount )
                             .build();
                 case 2:
-                    return new Creature.Builder().statistic( CreatureStatistic.MARKSMAN )
+                    return new RangedCreature(new AttackTwiceCreature(new Creature.Builder().statistic( CreatureStatistic.MARKSMAN )
                             .amount( aAmount )
-                            .build();
+                            .build()));
                 case 3:
                     return new Creature.Builder().statistic( CreatureStatistic.ROYAL_GRIFFIN )
                             .amount( aAmount )
                             .build();
                 case 4:
-                    return new Creature.Builder().statistic( CreatureStatistic.CRUSADER )
+                    return new AttackTwiceCreature(new Creature.Builder().statistic( CreatureStatistic.CRUSADER )
                             .amount( aAmount )
-                            .build();
+                            .build());
                 case 5:
                     return new Creature.Builder().statistic( CreatureStatistic.ZEALOT )
                             .amount( aAmount )

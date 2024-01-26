@@ -22,11 +22,11 @@ import lombok.Getter;
  */
 @Getter
 public class Creature implements PropertyChangeListener {
-    private CreatureStatisticIf stats;
+    protected CreatureStatisticIf stats;
     @Setter
     private int amount;
     private int currentHp;
-    private int counterAttackCounter = 1;
+    int counterAttackCounter = 1;
 
     private int shots;
     private DamageCalculatorIf calculator;
@@ -57,7 +57,7 @@ public class Creature implements PropertyChangeListener {
         return getAmount() > 0;
     }
 
-    private void applyDamage(final Creature aDefender, final int aDamage) {
+    void applyDamage(final Creature aDefender, final int aDamage) {
         int hpToSubstract = aDamage % aDefender.getMaxHp();
         int amountToSubstract = Math.round(aDamage / aDefender.getMaxHp());
 
@@ -80,11 +80,11 @@ public class Creature implements PropertyChangeListener {
         currentHp = aCurrentHp;
     }
 
-    private boolean canCounterAttack(final Creature aDefender) {
+    boolean canCounterAttack(final Creature aDefender) {
         return aDefender.getCounterAttackCounter() > 0 && aDefender.getCurrentHp() > 0;
     }
 
-    private void counterAttack(final Creature aAttacker) {
+    void counterAttack(final Creature aAttacker) {
         final int damage = aAttacker.getCalculator()
                 .calculateDamage(aAttacker, this);
         applyDamage(this, damage);
@@ -123,6 +123,14 @@ public class Creature implements PropertyChangeListener {
             return 15;
         }
 
+    }
+
+    boolean counterAttacked() {
+        if (counterAttackCounter > 0) {
+            return false;
+        } else {
+            return true;
+        }
     }
 
     public String getName() {

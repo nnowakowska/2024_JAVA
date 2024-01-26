@@ -20,7 +20,7 @@ public class GameEngine {
         this(aHero1, aHero2, new Board(aHero1.getCreatures(), aHero2.getCreatures()));
     }
 
-    GameEngine(Hero aHero1, Hero aHero2, Board aBoard) {
+    public GameEngine(Hero aHero1, Hero aHero2, Board aBoard) {
         turnQueue = new TurnQueue(aHero1.getCreatures(), aHero2.getCreatures());
         board = aBoard;
     }

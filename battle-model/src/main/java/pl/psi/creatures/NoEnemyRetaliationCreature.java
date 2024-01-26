@@ -4,10 +4,13 @@ import java.beans.PropertyChangeEvent;
 
 import com.google.common.collect.Range;
 
-class AttackTwiceCreature extends Creature {
+/**
+ * TODO: Describe this class (The first line - until the first dot - will interpret as the brief description).
+ */
+class NoEnemyRetaliationCreature extends Creature {
     private final Creature decorated;
 
-    public AttackTwiceCreature(final Creature aDecorated) {
+    public NoEnemyRetaliationCreature(final Creature aDecorated) {
         decorated = aDecorated;
     }
 
@@ -33,17 +36,11 @@ class AttackTwiceCreature extends Creature {
 
     @Override
     public void attack(final Creature aDefender) {
-        if (isAlive()) {
-            int damage = getCalculator().calculateDamage(this, aDefender);
-            decorated.applyDamage(aDefender, damage);
-            if (decorated.canCounterAttack(aDefender)) {
-                decorated.counterAttack(aDefender);
+            if (isAlive()) {
+                final int damage = getCalculator().calculateDamage(this, aDefender);
+                applyDamage(aDefender, damage);
             }
-            damage = getCalculator().calculateDamage(this, aDefender);
-            applyDamage(aDefender, damage);
-        }
     }
-
     @Override
     public boolean isAlive() {
         return decorated.isAlive();
@@ -92,5 +89,6 @@ class AttackTwiceCreature extends Creature {
     @Override
     public void propertyChange(final PropertyChangeEvent evt) {
         decorated.propertyChange(evt);
+
     }
 }

@@ -13,11 +13,16 @@ public class TravelBonusCreature extends Creature {
 
         decorated = aDecorated;
         factor = aFactor;
+        stats = decorated.getStats();
     }
 
     @Override
     public CreatureStatisticIf getStats() {
         return decorated.getStats();
+    }
+    @Override
+    public String toString() {
+        return getName();
     }
 
     @Override
