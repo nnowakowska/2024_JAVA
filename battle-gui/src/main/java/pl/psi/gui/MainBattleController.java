@@ -58,6 +58,10 @@ public class MainBattleController implements PropertyChangeListener {
                         gameEngine.attack(currentPoint);
                     });
                 }
+                if(creature.isPresent() && !gameEngine.isCurrentCreature(currentPoint))
+                {
+                    mapTile.setBackground(Color.HOTPINK);
+                }
                 gridMap.add(mapTile, x, y);
             }
         }

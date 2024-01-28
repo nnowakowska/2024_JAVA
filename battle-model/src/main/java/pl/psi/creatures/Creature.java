@@ -29,6 +29,7 @@ public class Creature implements PropertyChangeListener {
     int counterAttackCounter = 1;
 
     private int shots;
+    boolean isFlying;
     private DamageCalculatorIf calculator;
 
     Creature() {
@@ -40,6 +41,7 @@ public class Creature implements PropertyChangeListener {
         amount = aAmount;
         currentHp = stats.getMaxHp();
         shots = stats.getShots();
+        isFlying = stats.isFlying();
         calculator = aCalculator;
     }
 
@@ -102,6 +104,10 @@ public class Creature implements PropertyChangeListener {
     int getArmor() {
         return stats.getArmor();
     }
+
+//    boolean isFLying(){
+//        return stats.isFlying();
+//    }
 
     @Override
     public void propertyChange(final PropertyChangeEvent evt) {
