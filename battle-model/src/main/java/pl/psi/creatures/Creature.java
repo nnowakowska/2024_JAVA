@@ -29,7 +29,7 @@ public class Creature implements PropertyChangeListener {
     int counterAttackCounter = 1;
 
     private int shots;
-    boolean isFlying;
+    private boolean isFlying;
     private DamageCalculatorIf calculator;
 
     Creature() {
@@ -74,8 +74,15 @@ public class Creature implements PropertyChangeListener {
         aDefender.setAmount(aDefender.getAmount() - amountToSubstract);
     }
 
+    public Fraction getFraction() {
+        return stats.getFraction();
+    }
     public int getMaxHp() {
         return stats.getMaxHp();
+    }
+
+    public int getCounterAttackCounter(){
+         return counterAttackCounter;
     }
 
     protected void setCurrentHp(final int aCurrentHp) {
@@ -105,9 +112,6 @@ public class Creature implements PropertyChangeListener {
         return stats.getArmor();
     }
 
-//    boolean isFLying(){
-//        return stats.isFlying();
-//    }
 
     @Override
     public void propertyChange(final PropertyChangeEvent evt) {
@@ -171,7 +175,9 @@ public class Creature implements PropertyChangeListener {
             return new Creature(statistic, calculator, amount);
         }
     }
-
+    public boolean isFlying(){
+        return isFlying;
+    }
     @Override
     public String toString() {
         return getName();

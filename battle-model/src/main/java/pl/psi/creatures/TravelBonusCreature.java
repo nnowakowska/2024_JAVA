@@ -97,9 +97,6 @@ public class TravelBonusCreature extends Creature {
 
     @Override
     public void propertyChange(final PropertyChangeEvent evt) {
-        Point PointA = (Point) evt.getOldValue();
-        Point PointB = (Point) evt.getNewValue();
-        hexesTravelled = (int) PointA.distance(PointB);
 
         decorated.propertyChange(evt);
     }

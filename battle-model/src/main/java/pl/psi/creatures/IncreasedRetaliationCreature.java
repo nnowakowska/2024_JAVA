@@ -3,6 +3,7 @@ package pl.psi.creatures;
 import java.beans.PropertyChangeEvent;
 
 import com.google.common.collect.Range;
+import pl.psi.TurnQueue;
 
 /**
  * TODO: Describe this class (The first line - until the first dot - will interpret as the brief description).
@@ -15,7 +16,7 @@ class IncreasedRetaliationCreature extends Creature {
 
         decorated = aDecorated;
         decorated.counterAttackCounter = aRetaliationCounter;
-        maxRetaliations = aRetaliationCounter;
+        maxRetaliations  = aRetaliationCounter;
         stats = decorated.getStats();
     }
 
@@ -31,7 +32,7 @@ class IncreasedRetaliationCreature extends Creature {
 
     @Override
     public int getCounterAttackCounter() {
-        return retaliationCounter;
+        return decorated.getCounterAttackCounter();
     }
 
     @Override
@@ -93,8 +94,11 @@ class IncreasedRetaliationCreature extends Creature {
         decorated.setAmount(amount);
     }
 
+
     @Override
     public void propertyChange(final PropertyChangeEvent evt) {
-        decorated.propertyChange(evt);
+        if (TurnQueue.END_OF_TURN.equals(evt.getPropertyName())) {
+            counterAttackCounter = maxRetaliations;
+        }
     }
 }

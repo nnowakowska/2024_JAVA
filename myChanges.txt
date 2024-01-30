@@ -4,7 +4,7 @@
 4. Dodane zwiększanie ataku dla devils + test
 5. Dodany bonus od przebytych pól
 6. Dodane zwiększenie limitu counterattacku
+7. latanie i blokowane pola
 
 To Do:
 testy dla travelbonus oraz increasedretaliationcreature
-latanie

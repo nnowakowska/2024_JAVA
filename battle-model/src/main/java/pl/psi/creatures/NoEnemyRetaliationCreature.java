@@ -82,6 +82,11 @@ class NoEnemyRetaliationCreature extends Creature {
     }
 
     @Override
+    public boolean isFlying() {
+        return super.isFlying();
+    }
+
+    @Override
     public void setAmount(int amount) {
         decorated.setAmount(amount);
     }

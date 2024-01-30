@@ -8,6 +8,10 @@ public class NecropolisFactory
 
     private static final String EXCEPTION_MESSAGE = "We support tiers from 1 to 7";
 
+    public NecropolisFactory() {
+        Fraction fraction = Fraction.NECROPOLIS;
+    }
+    
     public Creature create( final boolean aIsUpgraded, final int aTier, final int aAmount )
     {
         if( !aIsUpgraded )

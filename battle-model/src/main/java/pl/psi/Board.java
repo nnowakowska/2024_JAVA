@@ -31,7 +31,7 @@ public class Board
         }
     }
 
-    Optional< Creature > getCreature( final Point aPoint )
+    public Optional< Creature > getCreature(final Point aPoint)
     {
         return Optional.ofNullable( map.get( aPoint ) );
     }
@@ -48,11 +48,11 @@ public class Board
         }
     }
 
-    boolean canMove( final Creature aCreature, final Point aPoint )
+    public boolean canMove(final Creature aCreature, final Point aPoint)
     {
         final Point oldPosition = getPosition( aCreature );
 
-        if(!checkBlockedPositions(aCreature, aPoint)){
+        if(!checkBlockedPositions(aCreature, aPoint) && !aCreature.isFlying()){
             return false;
         }
         if( map.containsKey( aPoint ) )
@@ -62,48 +62,35 @@ public class Board
         return aPoint.distance( oldPosition.getX(), oldPosition.getY() ) < aCreature.getMoveRange();
     }
 
-    Point getPosition( Creature aCreature )
+    public Point getPosition(Creature aCreature)
     {
         return map.inverse()
             .get( aCreature );
     }
     boolean checkBlockedPositions( final Creature aCreature, final Point aPoint) {
         final Point oldPosition = getPosition(aCreature);
-        List<Point> aList = new ArrayList<Point>();
         for (Point key : map.keySet()) {
-            if (!(key.getX() == oldPosition.getX() && key.getY() == oldPosition.getY())) {
-                aList = getPointsAroundPosition(key);
-                if (aList.contains(aPoint)) {
-                    if (!aPoint.checkCollinear(oldPosition.getX(), oldPosition.getY())
-                            && !aPoint.checkCollinear(key.getX(), key.getY())) {
-                        if (aPoint.distance(oldPosition.getX(), oldPosition.getY()) - 1 > key.distance(oldPosition.getX(), oldPosition.getY())) {
-                            return false;
-                        }
-                    } else if (aPoint.checkCollinear(oldPosition.getX(), oldPosition.getY())
-                            && aPoint.checkCollinear(key.getX(), key.getY())
-                            && aPoint.distance(oldPosition.getX(), oldPosition.getY()) > key.distance(oldPosition.getX(), oldPosition.getY())) {
-                        return false;
-                    } else if (!aPoint.checkCollinear(oldPosition.getX(), oldPosition.getY())
-                            && aPoint.checkCollinear(key.getX(), key.getY())
-                            && aPoint.distance(oldPosition.getX(), oldPosition.getY()) - 2 > key.distance(oldPosition.getX(), oldPosition.getY())) {
-                        return false;
-                    }
 
+            if (!(key.getX() == oldPosition.getX() && key.getY() == oldPosition.getY())) {
+                    if (aPoint.checkCollinear(oldPosition.getX(), oldPosition.getY()) && aPoint.checkCollinear(key.getX(), key.getY())) {
+                        if (isBlockedPosition(oldPosition, aPoint, key)) {
+                            return false;}
+                    }
+                    else if (aPoint.checkDiagonal(oldPosition.getX(), oldPosition.getY()) && aPoint.checkDiagonal(key.getX(), key.getY())){
+                        if (isBlockedPosition(oldPosition, aPoint, key)) {
+                            return false;}
+                    }
                 }
-            }
         }
         return true;
     }
 
-    List<Point> getPointsAroundPosition( Point aPoint){
-        List<Point> list = new ArrayList<Point>();
-        int aX = aPoint.getX();
-        int aY = aPoint.getY();
-        for(int i = -1; i < 2; i++){
-            for(int j = -1; j<2; j++){
-                list.add(new Point(aX+i, aY+j));
-            }
+    boolean isBlockedPosition( Point oldPosition, Point newPosition, Point obstaclePoint){
+        if (newPosition.distance(oldPosition.getX(), oldPosition.getY()) > obstaclePoint.distance(oldPosition.getX(), oldPosition.getY())
+            && newPosition.distance(oldPosition.getX(), oldPosition.getY()) > obstaclePoint.distance(newPosition.getX(), newPosition.getY() )) {
+            return true;
         }
-        return list;
+        else return false;
     }
+
 }

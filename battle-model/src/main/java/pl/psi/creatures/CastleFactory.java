@@ -5,7 +5,9 @@ import pl.psi.creatures.CreatureStatistic;
 
 public class CastleFactory
 {
-
+    public CastleFactory() {
+        Fraction fraction = Fraction.CASTLE;
+    }
     private static final String EXCEPTION_MESSAGE = "We support tiers from 1 to 7";
 
     public Creature create( final boolean aIsUpgraded, final int aTier, final int aAmount )

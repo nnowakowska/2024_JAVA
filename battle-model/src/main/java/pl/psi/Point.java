@@ -2,6 +2,8 @@ package pl.psi;
 
 import lombok.Value;
 
+import static java.lang.Math.abs;
+
 /**
  * TODO: Describe this class (The first line - until the first dot - will interpret as the brief description).
  */
@@ -22,25 +24,17 @@ public class Point
         return distance( aPoint.getX(), aPoint.getY() );
     }
 
-    public String direction(double px, double py){
-        if(px > getX()){
-          return "E";
-        }
-        else if (py > getY()){
-            return "N";
-        }
-        else if(px < getX()){
-            return "W";
-        }
-        else {
-            return "S";
-        }
-
-    }
     public boolean checkCollinear(double px, double py){
         if(px == getX() || py == getY()){
             return true;
     }
+        else return false;
+    }
+
+    public boolean checkDiagonal(double px, double py){
+        if(abs(px - getX()) == abs(py - getY())){
+            return true;
+        }
         else return false;
     }
     public double distance( double px, double py )

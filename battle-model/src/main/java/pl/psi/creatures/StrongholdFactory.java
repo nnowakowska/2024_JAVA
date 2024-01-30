@@ -5,7 +5,7 @@ public class StrongholdFactory
 {
 
     private static final String EXCEPTION_MESSAGE = "We support tiers from 1 to 7";
-
+    Fraction fraction = Fraction.STRONGHOLD;
     public Creature create( final boolean aIsUpgraded, final int aTier, final int aAmount )
     {
         if( !aIsUpgraded )

@@ -14,4 +14,6 @@ public interface CreatureStatisticIf {
     String getDescription();
     boolean isUpgraded();
     boolean isFlying();
+
+    Fraction getFraction();
 }
